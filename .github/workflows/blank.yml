@@ -46,8 +46,8 @@ jobs:
           # Update the script files to the latest version.
           cp -R ../../../source/dir/ target/dir/
 
-          diff = $(git diff --name-only HEAD^ HEAD)
-          echo "${{diff}}"
+          DIFF=$(git diff --name-only HEAD^ HEAD)
+          echo "${{DIFF}}"
           exit 1
           # Commit the changes and push the feature branch to origin
           git add .
