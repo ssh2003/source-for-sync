@@ -48,7 +48,7 @@ jobs:
           pwd
           #DIFF=$(git diff --name-only HEAD^ HEAD)
           #echo "$DIFF"
-          exit 1
+          exit 0
           # Commit the changes and push the feature branch to origin
           git add .
           git commit -m "update proto to $LATEST_TAG"
