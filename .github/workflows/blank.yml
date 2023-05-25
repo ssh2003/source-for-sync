@@ -45,10 +45,8 @@ jobs:
 
           # Update the script files to the latest version.
           cp -R ../../../source/dir target/dir
-          ls -la target/dir/
-          cat target/dir/file.proto
-          DIFF=$(git diff --name-only)
-          echo "$DIFF"
+          git diff --name-only
+          
           exit 0
           # Commit the changes and push the feature branch to origin
           git add .
