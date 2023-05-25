@@ -48,11 +48,7 @@ jobs:
 
             # Create a new feature branch for the changes.
             git checkout -b $BRANCH_NAME
-      - name: Copy proto files
-        run: |
-            REPOSITORY="ssh2003/target-for-sync"
-            FOLDER="bin/$REPOSITORY"
-            cd $FOLDER && \
+
             cp -Rv ../../../source/dir/ target/ && \
             git status && \
             DIFF=$(git diff --name-only) && \
@@ -77,6 +73,6 @@ jobs:
             gh auth login --with-token < token.txt
             gh pr create \
               --body "" \
-              --title "chore: update scripts to $LATEST_TAG" \
+              --title "update scripts to $LATEST_TAG" \
               --head "$BRANCH_NAME" \
               --base "main"
