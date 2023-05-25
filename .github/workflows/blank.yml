@@ -19,7 +19,7 @@ jobs:
           repository: ${{github.event.pull_request.head.repo.full_name}}
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: Send pull-request
+      - name: Checkout target repository
         run: |
           LATEST_TAG=$(git describe --tags --always --abbrev=0)
           REPOSITORY="ssh2003/target-for-sync"
@@ -33,35 +33,41 @@ jobs:
             --branch=main \
             https://ssh2003:${{ secrets.GH_TOKEN }}@github.com/$REPOSITORY \
             $FOLDER
+        - name: Create brunch
+          run: |
+            LATEST_TAG=$(git describe --tags --always --abbrev=0)
+            REPOSITORY="ssh2003/target-for-sync"
+            FOLDER="bin/$REPOSITORY"
+            BRANCH_NAME="update-proto-to-$LATEST_TAG"
 
-          cd $FOLDER
+            cd $FOLDER
 
-          # Setup the committers identity.
-          git config user.email "serhii.khylyk@gmail.com"
-          git config user.name "Serhii Khylyk"
+            # Setup the committers identity.
+            git config user.email "serhii.khylyk@gmail.com"
+            git config user.name "Serhii Khylyk"
 
-          # Create a new feature branch for the changes.
-          git checkout -b $BRANCH_NAME
+            # Create a new feature branch for the changes.
+            git checkout -b $BRANCH_NAME
+        - name: Copy proto files
+            # Update the script files to the latest version.
+            cp -R ../../../source/dir target/dir
+            git diff --name-only
 
-          # Update the script files to the latest version.
-          cp -R ../../../source/dir target/dir
-          git diff --name-only
-          
-          exit 0
+            exit 0
           # Commit the changes and push the feature branch to origin
-          git add .
-          git commit -m "update proto to $LATEST_TAG"
-          git push origin $BRANCH_NAME
-
-          # Store the PAT in a file that can be accessed by the
-          # GitHub CLI.
-          echo "${{ secrets.GH_TOKEN }}" > token.txt
-
-          # Authorize GitHub CLI for the current repository and
-          # create a pull-requests containing the updates.
-          gh auth login --with-token < token.txt
-          gh pr create \
-            --body "" \
-            --title "chore: update scripts to $LATEST_TAG" \
-            --head "$BRANCH_NAME" \
-            --base "main"
+          # git add .
+          # git commit -m "update proto to $LATEST_TAG"
+          # git push origin $BRANCH_NAME
+          #
+          # # Store the PAT in a file that can be accessed by the
+          # # GitHub CLI.
+          # echo "${{ secrets.GH_TOKEN }}" > token.txt
+          #
+          # # Authorize GitHub CLI for the current repository and
+          # # create a pull-requests containing the updates.
+          # gh auth login --with-token < token.txt
+          # gh pr create \
+          #   --body "" \
+          #   --title "chore: update scripts to $LATEST_TAG" \
+          #   --head "$BRANCH_NAME" \
+          #   --base "main"
