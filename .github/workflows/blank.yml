@@ -44,8 +44,8 @@ jobs:
           git checkout -b $BRANCH_NAME
 
           # Update the script files to the latest version.
-          ls -la && pwd
-          #cp -R ../../../scripts scripts
+          ls -la && pwd && ls -la ../../../source/dir/
+          cp -R ../../../source/dir/ target/dir/
 
           # Commit the changes and push the feature branch to origin
           git add .
