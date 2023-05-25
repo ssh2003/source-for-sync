@@ -44,7 +44,7 @@ jobs:
           git checkout -b $BRANCH_NAME
 
           # Update the script files to the latest version.
-          cp -R ../../../source/dir/ target/dir/
+          cp -R ../../../source/dir target/dir
           ls -la target/dir/
           cat target/dir/file.proto
           DIFF=$(git diff --name-only)
