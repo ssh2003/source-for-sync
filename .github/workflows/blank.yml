@@ -58,21 +58,25 @@ jobs:
             DIFF=$(git diff --name-only) && \
             STATUS=$(echo $DIFF|grep proto|wc -l)
             echo $STATUS
-
+            if [ $STATUS -le 0 ];
+            then
+              echo "Nothing changed..."
+              exit 0
+            fi
             # Commit the changes and push the feature branch to origin
-            # git add .
-            # git commit -m "update proto to $LATEST_TAG"
-            # git push origin $BRANCH_NAME
-            #
-            # # Store the PAT in a file that can be accessed by the
-            # # GitHub CLI.
-            # echo "${{ secrets.GH_TOKEN }}" > token.txt
-            #
-            # # Authorize GitHub CLI for the current repository and
-            # # create a pull-requests containing the updates.
-            # gh auth login --with-token < token.txt
-            # gh pr create \
-            #   --body "" \
-            #   --title "chore: update scripts to $LATEST_TAG" \
-            #   --head "$BRANCH_NAME" \
-            #   --base "main"
+            git add .
+            git commit -m "update proto to $LATEST_TAG"
+            git push origin $BRANCH_NAME
+
+            # Store the PAT in a file that can be accessed by the
+            # GitHub CLI.
+            echo "${{ secrets.GH_TOKEN }}" > token.txt
+
+            # Authorize GitHub CLI for the current repository and
+            # create a pull-requests containing the updates.
+            gh auth login --with-token < token.txt
+            gh pr create \
+              --body "" \
+              --title "chore: update scripts to $LATEST_TAG" \
+              --head "$BRANCH_NAME" \
+              --base "main"
