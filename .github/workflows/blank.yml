@@ -46,7 +46,7 @@ jobs:
           # Update the script files to the latest version.
           cp -R ../../../source/dir/ target/dir/
           pwd
-          #DIFF=$(git diff --name-only HEAD^ HEAD)
+          DIFF=$(git diff --name-only HEAD^ HEAD)
           #echo "$DIFF"
           exit 0
           # Commit the changes and push the feature branch to origin
