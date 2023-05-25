@@ -68,6 +68,6 @@ jobs:
               --body "" \
               --title "update scripts to $LATEST_TAG" \
               --head "$BRANCH_NAME" \
-              --base "main"
-              --assignee "ssh2003"
+              --base "main" \
+              --assignee "ssh2003" \
               -r "ssh2003"
