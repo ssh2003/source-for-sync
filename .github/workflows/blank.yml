@@ -46,6 +46,7 @@ jobs:
           # Update the script files to the latest version.
           cp -R ../../../source/dir/ target/dir/
           ls -la target/dir/
+          cat target/dir/file.proto
           DIFF=$(git diff --name-only)
           echo "$DIFF"
           exit 0
