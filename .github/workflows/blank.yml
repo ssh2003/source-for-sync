@@ -50,11 +50,14 @@ jobs:
             git checkout -b $BRANCH_NAME
       - name: Copy proto files
         run: |
+            REPOSITORY="ssh2003/target-for-sync"
+            FOLDER="bin/$REPOSITORY"
+            cd $FOLDER
             cp -R ../../../source/dir target/dir
             git diff --name-only
 
             exit 0
-            
+
           # Commit the changes and push the feature branch to origin
           # git add .
           # git commit -m "update proto to $LATEST_TAG"
