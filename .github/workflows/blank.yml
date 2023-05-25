@@ -21,7 +21,7 @@ jobs:
 
       - name: Checkout target repository
         run: |
-          LATEST_TAG=$(git describe --tags --always --abbrev=0)
+          LATEST_TAG=$(git describe --tags --always --abbrev=0 --short=6)
           REPOSITORY="ssh2003/target-for-sync"
           FOLDER="bin/$REPOSITORY"
           BRANCH_NAME="update-proto-to-$LATEST_TAG"
