@@ -33,8 +33,8 @@ jobs:
             --branch=main \
             https://ssh2003:${{ secrets.GH_TOKEN }}@github.com/$REPOSITORY \
             $FOLDER
-        - name: Create brunch
-          run: |
+      - name: Create brunch
+        run: |
             LATEST_TAG=$(git describe --tags --always --abbrev=0)
             REPOSITORY="ssh2003/target-for-sync"
             FOLDER="bin/$REPOSITORY"
@@ -48,12 +48,13 @@ jobs:
 
             # Create a new feature branch for the changes.
             git checkout -b $BRANCH_NAME
-        - name: Copy proto files
-            # Update the script files to the latest version.
+      - name: Copy proto files
+        run: |
             cp -R ../../../source/dir target/dir
             git diff --name-only
 
             exit 0
+            
           # Commit the changes and push the feature branch to origin
           # git add .
           # git commit -m "update proto to $LATEST_TAG"
