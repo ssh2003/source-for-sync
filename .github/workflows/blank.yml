@@ -45,7 +45,7 @@ jobs:
 
           # Update the script files to the latest version.
           cp -R ../../../source/dir/ target/dir/
-          pwd
+          ls -la
           DIFF=$(git diff --name-only "HEAD^ HEAD")
           #echo "$DIFF"
           exit 0
