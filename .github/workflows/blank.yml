@@ -44,12 +44,14 @@ jobs:
           git checkout -b $BRANCH_NAME
 
           # Update the script files to the latest version.
-          ls -la && pwd && ls -la ../../../source/dir/
           cp -R ../../../source/dir/ target/dir/
+
+          $diff = git diff --name-only HEAD^ HEAD
+          echo $diff
 
           # Commit the changes and push the feature branch to origin
           git add .
-          git commit -m "chore: update scripts to $LATEST_TAG"
+          git commit -m "update proto to $LATEST_TAG"
           git push origin $BRANCH_NAME
 
           # Store the PAT in a file that can be accessed by the
