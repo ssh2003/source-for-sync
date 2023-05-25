@@ -53,7 +53,7 @@ jobs:
             REPOSITORY="ssh2003/target-for-sync"
             FOLDER="bin/$REPOSITORY"
             cd $FOLDER
-            cp -R ../../../source/dir target/dir
+            cp -Rv ../../../source/dir target/dir
             git diff --name-only
 
             exit 0
