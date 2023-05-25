@@ -44,7 +44,7 @@ jobs:
 
             cp -Rv ../../../source/dir/ target/ && \
             git status && \
-            DIFF=$(git diff --name-only) && \
+            DIFF=$(git status) && \
             echo "$DIFF" && \
             STATUS=$(echo $DIFF|grep proto|wc -l)
             echo $STATUS
