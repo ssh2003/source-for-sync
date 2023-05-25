@@ -17,7 +17,7 @@ jobs:
           fetch-depth: 0 # Checkout everything to get access to the tags
           ref: ${{github.event.pull_request.head.ref}}
           repository: ${{github.event.pull_request.head.repo.full_name}}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
 
       - name: Send pull-request
         run: |
@@ -31,7 +31,7 @@ jobs:
           git clone \
             --depth=1 \
             --branch=main \
-            https://ssh2003:${{ secrets.ACCESS_TOKEN }}@github.com/$REPOSITORY \
+            https://ssh2003:${{ secrets.GH_TOKEN }}@github.com/$REPOSITORY \
             $FOLDER
 
           cd $FOLDER
@@ -54,7 +54,7 @@ jobs:
 
           # Store the PAT in a file that can be accessed by the
           # GitHub CLI.
-          echo "${{ secrets.ACCESS_TOKEN }}" > token.txt
+          echo "${{ secrets.GH_TOKEN }}" > token.txt
 
           # Authorize GitHub CLI for the current repository and
           # create a pull-requests containing the updates.
