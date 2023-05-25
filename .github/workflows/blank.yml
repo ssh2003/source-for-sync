@@ -47,7 +47,7 @@ jobs:
           cp -R ../../../source/dir/ target/dir/
           ls -la
           DIFF=$(git diff --name-only)
-          #echo "$DIFF"
+          echo "$DIFF"
           exit 0
           # Commit the changes and push the feature branch to origin
           git add .
