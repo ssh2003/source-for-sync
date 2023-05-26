@@ -3,7 +3,11 @@ on:
     branches:
       - main
     paths:
+<<<<<<< HEAD
       - "**.proto"
+=======
+      - '**.proto'
+>>>>>>> refs/remotes/origin/main
     tags-ignore:
       - "**"
 
