@@ -10,8 +10,6 @@ on:
 name: on-commit-to-main
 env:
   REPOSITORY: "ssh2003/target-for-sync"
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 jobs:
   send-pull-requests:
     runs-on: ubuntu-latest
@@ -86,7 +84,7 @@ jobs:
           cd ${{ env.FOLDER }}
           # Authorize GitHub CLI for the current repository and
           # create a pull-requests containing the updates.
-          gh auth login
+          echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
       - name: make PR
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
