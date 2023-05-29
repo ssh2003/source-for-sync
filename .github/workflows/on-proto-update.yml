@@ -9,7 +9,7 @@ on:
 
 name: on-commit-to-main
 env:
-  REPOSITORY=ssh2003/target-for-sync
+  REPOSITORY: "ssh2003/target-for-sync"
 
 jobs:
   send-pull-requests:
