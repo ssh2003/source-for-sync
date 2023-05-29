@@ -36,11 +36,7 @@ jobs:
           echo "${{ env.LATEST_TAG }}"
           echo "${{ env.REPOSITORY }}"
           echo "${{ env.FOLDER }}"
-          echo "${{ env.BRANCH_NAME }}"
-      - name: setup git commiters identity
-        run: |
-          git config user.email "serhii.khylyk@gmail.com"
-          git config user.name "Serhii Khylyk"
+          echo "${{ env.BRANCH_NAME }}"    
       - name: clone target repo
         run: |
           # Clone the remote repository and change working directory to the
@@ -69,6 +65,9 @@ jobs:
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
           cd ${{ env.FOLDER }}
+          # set commiter identity
+          git config user.email "serhii.khylyk@gmail.com"
+          git config user.name "Serhii Khylyk"
           # Commit the changes and push the feature branch to origin
           git add .
           git commit -m "update proto to ${{ env.LATEST_TAG }}"
