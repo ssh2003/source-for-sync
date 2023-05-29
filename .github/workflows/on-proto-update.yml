@@ -93,4 +93,4 @@ jobs:
             --base "main" \
             --assignee "ssh2003"
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
