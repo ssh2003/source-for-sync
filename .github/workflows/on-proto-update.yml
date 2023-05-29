@@ -85,10 +85,12 @@ jobs:
           cd ${{ env.FOLDER }}
           # Authorize GitHub CLI for the current repository and
           # create a pull-requests containing the updates.
-          gh auth login --with-token << ${{ env.TOKEN }}
+          gh auth login
           gh pr create \
             --body "" \
             --title "update proto to ${{ env.LATEST_TAG }}" \
             --head "${{ env.BRANCH_NAME }}" \
             --base "main" \
             --assignee "ssh2003"
+        with:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
