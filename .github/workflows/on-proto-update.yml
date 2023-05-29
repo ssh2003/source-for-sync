@@ -64,6 +64,10 @@ jobs:
         uses: tj-actions/changed-files@v36
         with:
           files: source/dir/*.proto
+      - name: Run step if any file(s) proto change
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        run: |
+          echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
 
           #   git status && \
           #   DIFF=$(git status) && \
