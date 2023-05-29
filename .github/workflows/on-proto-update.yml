@@ -25,12 +25,11 @@ jobs:
 
       - name: Setup env
         run: |
-          echo "LATEST_TAG=$(git rev-parse --short=6 HEAD)" >> $GITHUB_ENV
-          #echo "REPOSITORY=ssh2003/target-for-sync" >> $GITHUB_ENV
+          echo "LATEST_TAG=$(git rev-parse --short=6 HEAD)" >> "$GITHUB_ENV"
           FOLDER="bin/$REPOSITORY"
           BRANCH_NAME="update-proto-to-$LATEST_TAG"
           echo "============================================================="
-          echo "$LATEST_TAG"
+          echo "${{ env.LATEST_TAG }}"
           echo "${{ env.REPOSITORY }}"
 
           # # Clone the remote repository and change working directory to the
