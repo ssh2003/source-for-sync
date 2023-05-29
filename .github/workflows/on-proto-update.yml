@@ -90,4 +90,4 @@ jobs:
             --title "update proto to ${{ env.LATEST_TAG }}" \
             --head "${{ env.BRANCH_NAME }}" \
             --base "main" \
-            -r "ssh2003"
+            --assignee "ssh2003"
