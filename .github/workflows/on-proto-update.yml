@@ -41,7 +41,8 @@ jobs:
         with:
           repository: ${{ env.REPOSITORY }}
           path: ${{ env.FOLDER }}
-          
+          token: ${{ secrets.GH_TOKEN }}
+
       # - name: clone target repo
       #   run: |
       #     # Clone the remote repository and change working directory to the
