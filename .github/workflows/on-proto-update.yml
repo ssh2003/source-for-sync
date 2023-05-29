@@ -53,6 +53,7 @@ jobs:
            cp -Rv ../../../source/dir/ target/
       - name: check python
         run: python -V
+        
       - name: check if we need to commit
         id: changed-files-specific
         uses: tj-actions/changed-files@v36
