@@ -92,5 +92,5 @@ jobs:
             --head "${{ env.BRANCH_NAME }}" \
             --base "main" \
             --assignee "ssh2003"
-        with:
+        env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
