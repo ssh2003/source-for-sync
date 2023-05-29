@@ -55,10 +55,10 @@ jobs:
           cd ${{ env.FOLDER }}
           # Create a new feature branch for the changes.
           git checkout -b $BRANCH_NAME
-          #
-          #  cd $FOLDER
-          #
-          #   cp -Rv ../../../source/dir/ target/ && \
+      - name: copy all files from source repo
+        run: |
+           cd $FOLDER
+           cp -Rv ../../../source/dir/ target/
           #   git status && \
           #   DIFF=$(git status) && \
           #   echo "$DIFF" && \
