@@ -64,26 +64,15 @@ jobs:
         uses: tj-actions/changed-files@v36
         with:
           files: source/dir/*.proto
-      - name: Run step if any file(s) proto change
+      - name: Run commit if any file(s) proto change
+        id: run_commit
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
-          echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
+          # Commit the changes and push the feature branch to origin
+          git add .
+          git commit -m "update proto to ${{ env.LATEST_TAG }}"
+          git push origin $BRANCH_NAME
 
-          #   git status && \
-          #   DIFF=$(git status) && \
-          #   echo "$DIFF" && \
-          #   STATUS=$(echo $DIFF|grep proto|wc -l)
-          #   echo $STATUS
-          #   if [ $STATUS -le 0 ];
-          #   then
-          #     echo "Nothing changed..."
-          #     exit 0
-          #   fi
-          #   # Commit the changes and push the feature branch to origin
-          #   git add .
-          #   git commit -m "update proto to ${{ env.LATEST_TAG }}"
-          #   git push origin $BRANCH_NAME
-          #
           #   # Store the PAT in a file that can be accessed by the
           #   # GitHub CLI.
           #   echo "${{ secrets.GH_TOKEN }}" > token.txt
