@@ -21,10 +21,10 @@ jobs:
           repository: ${{github.event.pull_request.head.repo.full_name}}
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: Checkout target repository
+      - name: Setup env
         run: |
-          LATEST_TAG=$(git rev-parse --short=6 HEAD)
-          REPOSITORY="ssh2003/target-for-sync"
+          echo "LATEST_TAG=$(git rev-parse --short=6 HEAD)" >> $GITHUB_ENV
+          echo "REPOSITORY=ssh2003/target-for-sync" >> $GITHUB_ENV
           FOLDER="bin/$REPOSITORY"
           BRANCH_NAME="update-proto-to-$LATEST_TAG"
 
@@ -33,7 +33,7 @@ jobs:
           git clone \
             --depth=1 \
             --branch=main \
-            https://ssh2003:${{ secrets.GH_TOKEN }}@github.com/$REPOSITORY \
+            https://ssh2003:${{ secrets.GH_TOKEN }}@github.com/${{ env.REPOSITORY }} \
             $FOLDER
             cd $FOLDER
 
@@ -57,7 +57,7 @@ jobs:
             fi
             # Commit the changes and push the feature branch to origin
             git add .
-            git commit -m "update proto to $LATEST_TAG"
+            git commit -m "update proto to ${{ env.LATEST_TAG }}"
             git push origin $BRANCH_NAME
 
             # Store the PAT in a file that can be accessed by the
@@ -69,7 +69,7 @@ jobs:
             gh auth login --with-token < token.txt
             gh pr create \
               --body "" \
-              --title "update proto to $LATEST_TAG" \
+              --title "update proto to ${{ env.LATEST_TAG }}" \
               --head "$BRANCH_NAME" \
               --base "main" \
               --assignee "ssh2003" \
