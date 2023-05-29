@@ -28,6 +28,8 @@ jobs:
           echo "LATEST_TAG=$(git rev-parse --short=6 HEAD)" >> "$GITHUB_ENV"
           FOLDER="bin/$REPOSITORY"
           BRANCH_NAME="update-proto-to-$LATEST_TAG"
+      - name: use env
+        run: |
           echo "============================================================="
           echo "${{ env.LATEST_TAG }}"
           echo "${{ env.REPOSITORY }}"
