@@ -84,12 +84,12 @@ jobs:
       #     cd ${{ env.FOLDER }}
       #     # Authorize GitHub CLI for the current repository and
       #     # create a pull-requests containing the updates.
-      # 
+      #
       - name: make PR
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
           cd ${{ env.FOLDER }}
-          echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
+          echo ${{ secrets.GH_TOKEN }} | gh auth login --with-token
           gh pr create \
             --body "" \
             --title "update proto to ${{ env.LATEST_TAG }}" \
