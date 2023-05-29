@@ -50,13 +50,13 @@ jobs:
             --branch=main \
             https://ssh2003:${{ secrets.GH_TOKEN }}@github.com/${{ env.REPOSITORY }} \
             $FOLDER
-
-
-          #  cd $FOLDER
+      - name: create new branch
+        run: |
+          cd ${{ env.FOLDER }}
+          # Create a new feature branch for the changes.
+          git checkout -b $BRANCH_NAME
           #
-
-          #   # Create a new feature branch for the changes.
-          #   git checkout -b $BRANCH_NAME
+          #  cd $FOLDER
           #
           #   cp -Rv ../../../source/dir/ target/ && \
           #   git status && \
