@@ -73,7 +73,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          assignee: "ssh2003"
+          assignees: ssh2003
           path: ${{ env.FOLDER }}
       # - name: make PR
       #   if: steps.changed-files-specific.outputs.any_changed == 'true'
