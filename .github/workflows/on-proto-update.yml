@@ -71,20 +71,6 @@ jobs:
           git add .
           git commit -m "update proto to ${{ env.LATEST_TAG }}"
           git push origin ${{ env.BRANCH_NAME }}
-      # - name: Store PAT
-      #   if: steps.changed-files-specific.outputs.any_changed == 'true'
-      #   run: |
-      #     cd ${{ env.FOLDER }}
-      #     # Store the PAT in a file that can be accessed by the
-      #     # GitHub CLI.
-      #     echo "${{ secrets.GH_TOKEN }}" > token.txt
-      # - name: auth on github
-      #   if: steps.changed-files-specific.outputs.any_changed == 'true'
-      #   run: |
-      #     cd ${{ env.FOLDER }}
-      #     # Authorize GitHub CLI for the current repository and
-      #     # create a pull-requests containing the updates.
-      #
       - name: make PR
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
