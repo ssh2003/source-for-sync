@@ -26,7 +26,6 @@ jobs:
         run: |
           echo "LATEST_TAG=$(git rev-parse --short=6 HEAD)" >> "$GITHUB_ENV"
           echo "FOLDER=bin/${{ env.REPOSITORY }}" >> "$GITHUB_ENV"
-          echo "TOKEN=${{ secrets.GH_TOKEN }}" >> "$GITHUB_ENV"
       - name: Setup BRANCH_NAME
         run: |
           echo "BRANCH_NAME=update-proto-to-$LATEST_TAG" >> $GITHUB_ENV
