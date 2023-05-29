@@ -59,6 +59,12 @@ jobs:
         run: |
            cd ${{ env.FOLDER }}
            cp -Rv ../../../source/dir/ target/
+      - name: check if we need to commit
+        id: changed-files-specific
+        uses: tj-actions/changed-files@v36
+        with:
+          files: source/dir/*.proto
+
           #   git status && \
           #   DIFF=$(git status) && \
           #   echo "$DIFF" && \
