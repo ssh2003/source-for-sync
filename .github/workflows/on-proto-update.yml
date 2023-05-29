@@ -42,16 +42,6 @@ jobs:
           repository: ${{ env.REPOSITORY }}
           path: ${{ env.FOLDER }}
           token: ${{ secrets.GH_TOKEN }}
-
-      # - name: clone target repo
-      #   run: |
-      #     # Clone the remote repository and change working directory to the
-      #     # folder it was cloned to.
-      #     git clone \
-      #       --depth=1 \
-      #       --branch=main \
-      #       https://ssh2003:${{ secrets.GH_TOKEN }}@github.com/${{ env.REPOSITORY }} \
-      #       ${{ env.FOLDER }}
       - name: create new branch
         run: |
           cd ${{ env.FOLDER }}
