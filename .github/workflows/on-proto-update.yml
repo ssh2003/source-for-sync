@@ -36,7 +36,7 @@ jobs:
           echo "${{ env.LATEST_TAG }}"
           echo "${{ env.REPOSITORY }}"
           echo "${{ env.FOLDER }}"
-          echo "{{ env.BRANCH_NAME }}"
+          echo "${{ env.BRANCH_NAME }}"
 
           # # Clone the remote repository and change working directory to the
           # # folder it was cloned to.
