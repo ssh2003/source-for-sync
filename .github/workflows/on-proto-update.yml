@@ -29,49 +29,49 @@ jobs:
           BRANCH_NAME="update-proto-to-$LATEST_TAG"
           echo $REPOSITORY
 
-          # Clone the remote repository and change working directory to the
-          # folder it was cloned to.
-          git clone \
-            --depth=1 \
-            --branch=main \
-            https://ssh2003:${{ secrets.GH_TOKEN }}@github.com/$REPOSITORY \
-            $FOLDER
-            cd $FOLDER
-
-            # Setup the committers identity.
-            git config user.email "serhii.khylyk@gmail.com"
-            git config user.name "Serhii Khylyk"
-
-            # Create a new feature branch for the changes.
-            git checkout -b $BRANCH_NAME
-
-            cp -Rv ../../../source/dir/ target/ && \
-            git status && \
-            DIFF=$(git status) && \
-            echo "$DIFF" && \
-            STATUS=$(echo $DIFF|grep proto|wc -l)
-            echo $STATUS
-            if [ $STATUS -le 0 ];
-            then
-              echo "Nothing changed..."
-              exit 0
-            fi
-            # Commit the changes and push the feature branch to origin
-            git add .
-            git commit -m "update proto to ${{ env.LATEST_TAG }}"
-            git push origin $BRANCH_NAME
-
-            # Store the PAT in a file that can be accessed by the
-            # GitHub CLI.
-            echo "${{ secrets.GH_TOKEN }}" > token.txt
-
-            # Authorize GitHub CLI for the current repository and
-            # create a pull-requests containing the updates.
-            gh auth login --with-token < token.txt
-            gh pr create \
-              --body "" \
-              --title "update proto to ${{ env.LATEST_TAG }}" \
-              --head "$BRANCH_NAME" \
-              --base "main" \
-              --assignee "ssh2003" \
-              -r "ssh2003"
+          # # Clone the remote repository and change working directory to the
+          # # folder it was cloned to.
+          # git clone \
+          #   --depth=1 \
+          #   --branch=main \
+          #   https://ssh2003:${{ secrets.GH_TOKEN }}@github.com/$REPOSITORY \
+          #   $FOLDER
+          #   cd $FOLDER
+          #
+          #   # Setup the committers identity.
+          #   git config user.email "serhii.khylyk@gmail.com"
+          #   git config user.name "Serhii Khylyk"
+          #
+          #   # Create a new feature branch for the changes.
+          #   git checkout -b $BRANCH_NAME
+          #
+          #   cp -Rv ../../../source/dir/ target/ && \
+          #   git status && \
+          #   DIFF=$(git status) && \
+          #   echo "$DIFF" && \
+          #   STATUS=$(echo $DIFF|grep proto|wc -l)
+          #   echo $STATUS
+          #   if [ $STATUS -le 0 ];
+          #   then
+          #     echo "Nothing changed..."
+          #     exit 0
+          #   fi
+          #   # Commit the changes and push the feature branch to origin
+          #   git add .
+          #   git commit -m "update proto to ${{ env.LATEST_TAG }}"
+          #   git push origin $BRANCH_NAME
+          #
+          #   # Store the PAT in a file that can be accessed by the
+          #   # GitHub CLI.
+          #   echo "${{ secrets.GH_TOKEN }}" > token.txt
+          #
+          #   # Authorize GitHub CLI for the current repository and
+          #   # create a pull-requests containing the updates.
+          #   gh auth login --with-token < token.txt
+          #   gh pr create \
+          #     --body "" \
+          #     --title "update proto to ${{ env.LATEST_TAG }}" \
+          #     --head "$BRANCH_NAME" \
+          #     --base "main" \
+          #     --assignee "ssh2003" \
+          #     -r "ssh2003"
