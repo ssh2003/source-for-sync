@@ -83,8 +83,8 @@ jobs:
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
           cd ${{ env.FOLDER }}
-        # Authorize GitHub CLI for the current repository and
-        # create a pull-requests containing the updates.
+          # Authorize GitHub CLI for the current repository and
+          # create a pull-requests containing the updates.
           gh auth login
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
