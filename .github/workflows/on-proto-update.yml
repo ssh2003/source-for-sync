@@ -36,7 +36,7 @@ jobs:
           echo "${{ env.LATEST_TAG }}"
           echo "${{ env.REPOSITORY }}"
           echo "${{ env.FOLDER }}"
-          echo "${{ env.BRANCH_NAME }}"    
+          echo "${{ env.BRANCH_NAME }}"
       - name: clone target repo
         run: |
           # Clone the remote repository and change working directory to the
@@ -71,7 +71,7 @@ jobs:
           # Commit the changes and push the feature branch to origin
           git add .
           git commit -m "update proto to ${{ env.LATEST_TAG }}"
-          git push origin $BRANCH_NAME
+          git push origin ${{ env.BRANCH_NAME }}
 
           #   # Store the PAT in a file that can be accessed by the
           #   # GitHub CLI.
