@@ -68,6 +68,7 @@ jobs:
         id: run_commit
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
+          cd ${{ env.FOLDER }}
           # Commit the changes and push the feature branch to origin
           git add .
           git commit -m "update proto to ${{ env.LATEST_TAG }}"
