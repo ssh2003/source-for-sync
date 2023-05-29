@@ -28,6 +28,7 @@ jobs:
           FOLDER="bin/$REPOSITORY"
           BRANCH_NAME="update-proto-to-$LATEST_TAG"
           echo "============================================================="
+          echo "$LATEST_TAG"
           echo "${{ env.REPOSITORY }}"
 
           # # Clone the remote repository and change working directory to the
