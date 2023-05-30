@@ -73,8 +73,14 @@ jobs:
                 print(line, end="")
             file.close()
           EOF
-      - name: check script
-        run: cat /tmp/script.py
+      - name: make script executable
+        run: chmod +x /tmp/script.py
+      - name: add lines to file4.proto
+        run: |
+          /tmp/script.py target/models/file4.proto tag2 > target/models/file4.proto.tmp
+          mv target/models/file4.proto.tmp target/models/file4.proto
+      - name: check file4.proto
+        run: cat target/models/file4.proto
       # - name: check if we need to commit
       #   id: changed-files-specific
       #   uses: tj-actions/changed-files@v36
