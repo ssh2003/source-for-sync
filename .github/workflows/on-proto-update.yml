@@ -53,6 +53,9 @@ jobs:
            cd ${{ env.FOLDER }}
            cp -Rv ../../../source/dir/models/ target/models
            cp -Rv ../../../source/dir/public/ target/public
+      - name: directory structure after copy
+        run: |
+          pwd && ls -la && cd target && ls -la && pwd
       - name: push script
         run: |
           cat << EOF > /tmp/script.py
