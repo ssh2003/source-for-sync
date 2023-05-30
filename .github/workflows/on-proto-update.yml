@@ -40,7 +40,7 @@ jobs:
         run: |
           cd ${{ env.FOLDER }}
           # Create a new feature branch for the changes.
-          git checkout -b $BRANCH_NAME
+          git checkout -b ${{ env.BRANCH_NAME }}
       - name: copy all files from source repo
         run: |
            cd ${{ env.FOLDER }}
