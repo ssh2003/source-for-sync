@@ -67,8 +67,8 @@ jobs:
           cat /tmp/script.py
       - name: run script
         run: |
-          /tmp/script.py
-          
+          python /tmp/script.py
+
       # - name: add lines to file4.proto
       #   run: |
       #     cd ${{ env.FOLDER }} && \
