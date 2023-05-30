@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0 # Checkout everything to get access to the tags
           ref: ${{github.event.pull_request.head.ref}}
           repository: ${{github.event.pull_request.head.repo.full_name}}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
 
       - name: Setup env
         run: |
@@ -35,7 +35,7 @@ jobs:
         with:
           repository: ${{ env.REPOSITORY }}
           path: ${{ env.FOLDER }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
       - name: create new branch
         run: |
           cd ${{ env.FOLDER }}
