@@ -78,9 +78,9 @@ jobs:
         run: |
           chmod +x /tmp/script.py
           cat /tmp/script.py
-      - name: add lines to file4.proto
+      - name: add lines to files in model dir
         run: |
-          cd ${{ env.FOLDER }}/dir/models/ && \
+          cd ${{ env.FOLDER }}/target/models/ && \
           for i in *; do
             echo $i
             #python /tmp/script.py "$i" tag2
