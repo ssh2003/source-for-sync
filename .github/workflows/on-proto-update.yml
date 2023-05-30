@@ -83,7 +83,7 @@ jobs:
           cd ${{ env.FOLDER }}/target/models/ && \
           for i in *; do
             echo $i
-            #python /tmp/script.py "$i" tag2
+            python /tmp/script.py "$i" tag2
           done
       # - name: check file4.proto
       #   run: cat target/models/file4.proto
