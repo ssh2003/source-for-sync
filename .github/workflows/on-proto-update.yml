@@ -52,7 +52,7 @@ jobs:
         run: |
            cd ${{ env.FOLDER }}
            cp -Rv ../../../source/dir/models/ target/models
-           cp -RV ../../../source/dir/public/ target/public
+           cp -Rv ../../../source/dir/public/ target/public
       - name: check python
         run: python -V
 
