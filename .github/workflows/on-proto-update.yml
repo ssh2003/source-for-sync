@@ -82,7 +82,7 @@ jobs:
         run: |
           cd ${{ env.FOLDER }} && \
           for i in *; do
-            python /tmp/script.py $(basename "$") tag2
+            python /tmp/script.py $(basename "$i") tag2
           done
       # - name: check file4.proto
       #   run: cat target/models/file4.proto
