@@ -77,10 +77,10 @@ jobs:
         run: |
           chmod +x /tmp/script.py
           cat /tmp/script.py
-       - name: add lines to file4.proto
-         run: |
-            cd ${{ env.FOLDER }} && \
-           /tmp/script.py target/models/file4.proto tag2
+      - name: add lines to file4.proto
+        run: |
+          cd ${{ env.FOLDER }} && \
+          /tmp/script.py target/models/file4.proto tag2
       # - name: check file4.proto
       #   run: cat target/models/file4.proto
       # - name: check if we need to commit
