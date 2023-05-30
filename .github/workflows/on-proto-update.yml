@@ -73,10 +73,6 @@ jobs:
             print(line, end="")
           file.close()
           EOF
-      - name: make script executable
-        run: |
-          chmod +x /tmp/script.py
-          cat /tmp/script.py
       - name: add lines to files in model dir
         run: |
           cd ${{ env.FOLDER }}/target/models/ && \
@@ -93,6 +89,11 @@ jobs:
             python /tmp/script.py "$i" tag2 > ${i}.tmp
             mv ${i}.tmp ${i}
           done
+      - name: add line to file without tag2
+        run: |
+          cd ${{ env.FOLDER }}/target/public/ && \
+          python /tmp/script.py file3.proto tag1 > file3.proto.tmp && \
+          mv file3.proto.tmp file3.proto
       - name: Run commit
         run: |
           cd ${{ env.FOLDER }}
