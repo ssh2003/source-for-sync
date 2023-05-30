@@ -83,10 +83,11 @@ jobs:
           cd ${{ env.FOLDER }}/target/models/ && \
           for i in *; do
             echo $i
-            python /tmp/script.py "$i" tag2
+            python /tmp/script.py "$i" tag2 > ${i}.tmp
+            mv ${i}.tmp ${i}
           done
-      # - name: check file4.proto
-      #   run: cat target/models/file4.proto
+      - name: check file4.proto
+        run: cat target/models/file4.proto
       # - name: check if we need to commit
       #   id: changed-files-specific
       #   uses: tj-actions/changed-files@v36
