@@ -60,14 +60,27 @@ jobs:
           cat << EOF > /tmp/script.py
           #!/usr/bin/env python3
           print("hello world")
+          import sys
+          file_name = sys.argv[1]
+          tag_string = sys.argv[2]
+          file = open(file_name, "r+")
+          while True:
+            line = file.readline()
+            line.strip()
+            if not line:
+              break
+            if line.startswith(tag_string):
+              line = line + "\n\nAddition line\n\n"
+            print(line, end="")
+          file.close()
           EOF
       - name: make script executable
         run: |
           chmod +x /tmp/script.py
           cat /tmp/script.py
-      - name: run script
-        run: |
-          python /tmp/script.py
+      # - name: run script
+      #   run: |
+      #     python /tmp/script.py
 
       # - name: add lines to file4.proto
       #   run: |
