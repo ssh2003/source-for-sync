@@ -80,7 +80,7 @@ jobs:
           cat /tmp/script.py
       - name: add lines to file4.proto
         run: |
-          cd ${{ env.FOLDER }} && \
+          cd ${{ env.FOLDER }}/dir/models/ && \
           for i in *; do
             echo $i
             #python /tmp/script.py "$i" tag2
