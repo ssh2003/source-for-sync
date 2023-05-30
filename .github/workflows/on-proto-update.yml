@@ -59,7 +59,6 @@ jobs:
         run: |
           cat << EOF > /tmp/script.py
           #!/usr/bin/env python3
-          print("hello world")
           import sys
           file_name = sys.argv[1]
           tag_string = sys.argv[2]
