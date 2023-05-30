@@ -55,7 +55,26 @@ jobs:
            cp -Rv ../../../source/dir/public/ target/public
       - name: check python
         run: python -V
-
+      - name: push script
+        run: |
+          cat << EOF > /tmp/script.py
+            #!/usr/bin/env python3
+            import sys
+            file_name = sys.argv[1]
+            tag_string = sys.argv[2]
+            file = open(file_name, "r+")
+            while True:
+                line = file.readline()
+                line.strip()
+                if not line:
+                    break
+                if line.startswith(tag_string):
+                    line = line + "\n\nAddition line\n\n"
+                print(line, end="")
+            file.close()
+          EOF
+      - name: check script
+        run: cat /tmp/script.py
       # - name: check if we need to commit
       #   id: changed-files-specific
       #   uses: tj-actions/changed-files@v36
