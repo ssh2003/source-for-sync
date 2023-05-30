@@ -86,10 +86,15 @@ jobs:
             python /tmp/script.py "$i" tag2 > ${i}.tmp
             mv ${i}.tmp ${i}
           done
-      - name: check file4.proto
+      - name: add lines to files in public dir
         run: |
-          cd ${{ env.FOLDER }}
-          cat target/models/file4.proto
+          cd ${{ env.FOLDER }}/target/public/ && \
+          for i in *; do
+            echo $i
+            python /tmp/script.py "$i" tag2 > ${i}.tmp
+            mv ${i}.tmp ${i}
+          done
+
       # - name: check if we need to commit
       #   id: changed-files-specific
       #   uses: tj-actions/changed-files@v36
