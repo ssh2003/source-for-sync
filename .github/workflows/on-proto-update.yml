@@ -56,30 +56,30 @@ jobs:
       - name: check python
         run: python -V
 
-      - name: check if we need to commit
-        id: changed-files-specific
-        uses: tj-actions/changed-files@v36
-        with:
-          files: source/dir/*.proto
-      - name: Run commit if any file(s) proto change
-        if: steps.changed-files-specific.outputs.any_changed == 'true'
-        run: |
-          cd ${{ env.FOLDER }}
-          # set commiter identity
-          git config user.email "serhii.khylyk@gmail.com"
-          git config user.name "Serhii Khylyk"
-          # Commit the changes and push the feature branch to origin
-          git add .
-          git commit -m "update proto to ${{ env.LATEST_TAG }}"
-          git push origin ${{ env.BRANCH_NAME }}
-      - name: make PR
-        if: steps.changed-files-specific.outputs.any_changed == 'true'
-        run: |
-          cd ${{ env.FOLDER }}
-          echo ${{ secrets.GH_TOKEN }} | gh auth login --with-token
-          gh pr create \
-            --body "" \
-            --title "update proto to ${{ env.LATEST_TAG }}" \
-            --head "${{ env.BRANCH_NAME }}" \
-            --base "main" \
-            --assignee "ssh2003"
+      # - name: check if we need to commit
+      #   id: changed-files-specific
+      #   uses: tj-actions/changed-files@v36
+      #   with:
+      #     files: source/dir/*.proto
+      # - name: Run commit if any file(s) proto change
+      #   if: steps.changed-files-specific.outputs.any_changed == 'true'
+      #   run: |
+      #     cd ${{ env.FOLDER }}
+      #     # set commiter identity
+      #     git config user.email "serhii.khylyk@gmail.com"
+      #     git config user.name "Serhii Khylyk"
+      #     # Commit the changes and push the feature branch to origin
+      #     git add .
+      #     git commit -m "update proto to ${{ env.LATEST_TAG }}"
+      #     git push origin ${{ env.BRANCH_NAME }}
+      # - name: make PR
+      #   if: steps.changed-files-specific.outputs.any_changed == 'true'
+      #   run: |
+      #     cd ${{ env.FOLDER }}
+      #     echo ${{ secrets.GH_TOKEN }} | gh auth login --with-token
+      #     gh pr create \
+      #       --body "" \
+      #       --title "update proto to ${{ env.LATEST_TAG }}" \
+      #       --head "${{ env.BRANCH_NAME }}" \
+      #       --base "main" \
+      #       --assignee "ssh2003"
