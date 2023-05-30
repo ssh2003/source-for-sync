@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0 # Checkout everything to get access to the tags
           ref: ${{github.event.pull_request.head.ref}}
           repository: ${{github.event.pull_request.head.repo.full_name}}
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup env
         run: |
@@ -30,19 +30,12 @@ jobs:
       - name: Setup BRANCH_NAME
         run: |
           echo "BRANCH_NAME=update-proto-to-$LATEST_TAG" >> $GITHUB_ENV
-      - name: use env
-        run: |
-          echo "============================================================="
-          echo "${{ env.LATEST_TAG }}"
-          echo "${{ env.REPOSITORY }}"
-          echo "${{ env.FOLDER }}"
-          echo "${{ env.BRANCH_NAME }}"
       - name: clone target repo
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
         with:
           repository: ${{ env.REPOSITORY }}
           path: ${{ env.FOLDER }}
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: create new branch
         run: |
           cd ${{ env.FOLDER }}
@@ -109,7 +102,7 @@ jobs:
       - name: make PR
         run: |
           cd ${{ env.FOLDER }}
-          echo ${{ secrets.GH_TOKEN }} | gh auth login --with-token
+          echo ${{ secrets.GITHUB_TOKEN }} | gh auth login --with-token
           gh pr create \
             --body "" \
             --title "update proto to ${{ env.LATEST_TAG }}" \
