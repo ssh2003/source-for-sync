@@ -87,7 +87,9 @@ jobs:
             mv ${i}.tmp ${i}
           done
       - name: check file4.proto
-        run: cat target/models/file4.proto
+        run: |
+          cd ${{ env.FOLDER }}
+          cat target/models/file4.proto
       # - name: check if we need to commit
       #   id: changed-files-specific
       #   uses: tj-actions/changed-files@v36
