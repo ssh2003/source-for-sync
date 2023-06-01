@@ -3,8 +3,9 @@ on:
     branches:
       - main
     paths:
-      - 'source/dir/models/**.proto'
-      - 'source/dir/public/**.proto'
+      - 'source/dir/models/file4.proto'
+      - 'source/dir/public/file.proto'
+      - 'source/dir/public/file3.proto'
     tags-ignore:
       - "**"
 
