@@ -1,15 +1,11 @@
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'source/dir/models/file4.proto'
-      - 'source/dir/public/file.proto'
-      - 'source/dir/public/file3.proto'
-    tags-ignore:
-      - "**"
+  workflow_call:
+    inputs:
+      repo:
+        description: 'Repository to sync'
+        required: true
 
-name: on-commit-to-main
+name: syncronize
 env:
   REPOSITORY: "ssh2003/target-for-sync"
 jobs:
@@ -27,14 +23,14 @@ jobs:
       - name: Setup env
         run: |
           echo "LATEST_TAG=$(git rev-parse --short=6 HEAD)" >> "$GITHUB_ENV"
-          echo "FOLDER=bin/${{ env.REPOSITORY }}" >> "$GITHUB_ENV"
+          echo "FOLDER=bin/${{ inputs.repo }}" >> "$GITHUB_ENV"
       - name: Setup BRANCH_NAME
         run: |
           echo "BRANCH_NAME=update-proto-to-$LATEST_TAG" >> $GITHUB_ENV
       - name: clone target repo
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
         with:
-          repository: ${{ env.REPOSITORY }}
+          repository: ${{ inputs.go_version }}
           path: ${{ env.FOLDER }}
           token: ${{ secrets.GH_TOKEN }}
       - name: create new branch
