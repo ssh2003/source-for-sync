@@ -67,7 +67,8 @@ jobs:
           EOF
       - name: where
         run: |
-          pwd && ls -la && ls -la bin && ls -ls bin/ssh2003/target-for-sync/ 
+          pwd && ls -la && ls -la bin && ls -ls bin/ssh2003/target-for-sync/ && \
+          ls -ls bin/ssh2003/target-for-sync/target/
       - name: add lines to files in model dir
         run: |
           pwd && \
