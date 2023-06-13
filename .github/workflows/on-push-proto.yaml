@@ -1,1 +1,23 @@
 
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'source/dir/models/file4.proto'
+      - 'source/dir/public/file.proto'
+      - 'source/dir/public/file3.proto'
+    tags-ignore:
+      - "**"
+
+name: proto-sync
+
+jobs:
+  sync-first-repo:
+    uses: ssh2003/shared-actions/.github/workflow/syncronize-all.yaml@main
+    with:
+      repo: "ssh2003/target-for-sync"
+  sync-second-repo:
+    uses: ssh2003/shared-actions/.github/workflow/syncronize-all.yaml@main
+    with:
+      repo: "ssh2003/second-target-for-sync"
