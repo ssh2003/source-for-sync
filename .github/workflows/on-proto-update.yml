@@ -6,8 +6,6 @@ on:
         required: true
 
 name: on-proto-update
-env:
-  REPOSITORY: "ssh2003/target-for-sync"
 jobs:
   send-pull-requests:
     runs-on: ubuntu-latest
