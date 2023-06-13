@@ -66,7 +66,7 @@ jobs:
           file.close()
           EOF
       - name: where
-        run: pwd && ls -la We && ls -la bin
+        run: pwd && ls -la && ls -la bin
       - name: add lines to files in model dir
         run: |
           pwd && \
