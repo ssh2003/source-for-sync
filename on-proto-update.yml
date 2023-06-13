@@ -1,112 +1,112 @@
-# #on:
-# #   push:
-# #     branches:
-# #       - main
-# #     paths:
-# #       - 'source/dir/models/file4.proto'
-# #       - 'source/dir/public/file.proto'
-# #       - 'source/dir/public/file3.proto'
-# #     tags-ignore:
-# #       - "**"
-#
-# name: on-commit-to-main
-# env:
-#   REPOSITORY: "ssh2003/target-for-sync"
-# jobs:
-#   send-pull-requests:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
-#         with:
-#           fetch-depth: 0 # Checkout everything to get access to the tags
-#           ref: ${{github.event.pull_request.head.ref}}
-#           repository: ${{github.event.pull_request.head.repo.full_name}}
-#           token: ${{ secrets.GH_TOKEN }}
-#
-#       - name: Setup env
-#         run: |
-#           echo "LATEST_TAG=$(git rev-parse --short=6 HEAD)" >> "$GITHUB_ENV"
-#           echo "FOLDER=bin/${{ env.REPOSITORY }}" >> "$GITHUB_ENV"
-#       - name: Setup BRANCH_NAME
-#         run: |
-#           echo "BRANCH_NAME=update-proto-to-$LATEST_TAG" >> $GITHUB_ENV
-#       - name: clone target repo
-#         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
-#         with:
-#           repository: ${{ env.REPOSITORY }}
-#           path: ${{ env.FOLDER }}
-#           token: ${{ secrets.GH_TOKEN }}
-#       - name: create new branch
-#         run: |
-#           cd ${{ env.FOLDER }}
-#           # Create a new feature branch for the changes.
-#           git checkout -b ${{ env.BRANCH_NAME }}
-#       - name: copy all files from source repo
-#         run: |
-#            cd ${{ env.FOLDER }}
-#            cp -Rv ../../../source/dir/models target/
-#            cp -Rv ../../../source/dir/public target/
-#       - name: directory structure after copy
-#         run: |
-#           cd ${{ env.FOLDER }} && \
-#           pwd && ls -la && cd target && ls -la && pwd
-#       - name: push script
-#         run: |
-#           cat << EOF > /tmp/script.py
-#           #!/usr/bin/env python3
-#           import sys
-#           file_name = sys.argv[1]
-#           tag_string = sys.argv[2]
-#           file = open(file_name, "r+")
-#           while True:
-#             line = file.readline()
-#             line.strip()
-#             if not line:
-#               break
-#             if line.startswith(tag_string):
-#               line = line + "\n\nAddition line\n\n"
-#             print(line, end="")
-#           file.close()
-#           EOF
-#       - name: add lines to files in model dir
-#         run: |
-#           cd ${{ env.FOLDER }}/target/models/ && \
-#           for i in *; do
-#             echo $i
-#             python /tmp/script.py "$i" tag2 > ${i}.tmp
-#             mv ${i}.tmp ${i}
-#           done
-#       - name: add lines to files in public dir
-#         run: |
-#           cd ${{ env.FOLDER }}/target/public/ && \
-#           for i in *; do
-#             echo $i
-#             python /tmp/script.py "$i" tag2 > ${i}.tmp
-#             mv ${i}.tmp ${i}
-#           done
-#       - name: add line to file without tag2
-#         run: |
-#           cd ${{ env.FOLDER }}/target/public/ && \
-#           python /tmp/script.py file3.proto tag1 > file3.proto.tmp && \
-#           mv file3.proto.tmp file3.proto
-#       - name: Run commit
-#         run: |
-#           cd ${{ env.FOLDER }}
-#           # set commiter identity
-#           git config user.email "serhii.khylyk@gmail.com"
-#           git config user.name "Serhii Khylyk"
-#           # Commit the changes and push the feature branch to origin
-#           git add .
-#           git commit -m "update proto to ${{ env.LATEST_TAG }}"
-#           git push origin ${{ env.BRANCH_NAME }}
-#       - name: make PR
-#         run: |
-#           cd ${{ env.FOLDER }}
-#           echo ${{ secrets.GH_TOKEN }} | gh auth login --with-token
-#           gh pr create \
-#             --body "" \
-#             --title "update proto to ${{ env.LATEST_TAG }}" \
-#             --head "${{ env.BRANCH_NAME }}" \
-#             --base "main" \
-#             --assignee "ssh2003"
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'source/dir/models/file4.proto'
+      - 'source/dir/public/file.proto'
+      - 'source/dir/public/file3.proto'
+    tags-ignore:
+      - "**"
+
+name: on-commit-to-main
+env:
+  REPOSITORY: "ssh2003/target-for-sync"
+jobs:
+  send-pull-requests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+        with:
+          fetch-depth: 0 # Checkout everything to get access to the tags
+          ref: ${{github.event.pull_request.head.ref}}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Setup env
+        run: |
+          echo "LATEST_TAG=$(git rev-parse --short=6 HEAD)" >> "$GITHUB_ENV"
+          echo "FOLDER=bin/${{ env.REPOSITORY }}" >> "$GITHUB_ENV"
+      - name: Setup BRANCH_NAME
+        run: |
+          echo "BRANCH_NAME=update-proto-to-$LATEST_TAG" >> $GITHUB_ENV
+      - name: clone target repo
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+        with:
+          repository: ${{ env.REPOSITORY }}
+          path: ${{ env.FOLDER }}
+          token: ${{ secrets.GH_TOKEN }}
+      - name: create new branch
+        run: |
+          cd ${{ env.FOLDER }}
+          # Create a new feature branch for the changes.
+          git checkout -b ${{ env.BRANCH_NAME }}
+      - name: copy all files from source repo
+        run: |
+           cd ${{ env.FOLDER }}
+           cp -Rv ../../../source/dir/models target/
+           cp -Rv ../../../source/dir/public target/
+      - name: directory structure after copy
+        run: |
+          cd ${{ env.FOLDER }} && \
+          pwd && ls -la && cd target && ls -la && pwd
+      - name: push script
+        run: |
+          cat << EOF > /tmp/script.py
+          #!/usr/bin/env python3
+          import sys
+          file_name = sys.argv[1]
+          tag_string = sys.argv[2]
+          file = open(file_name, "r+")
+          while True:
+            line = file.readline()
+            line.strip()
+            if not line:
+              break
+            if line.startswith(tag_string):
+              line = line + "\n\nAddition line\n\n"
+            print(line, end="")
+          file.close()
+          EOF
+      - name: add lines to files in model dir
+        run: |
+          cd ${{ env.FOLDER }}/target/models/ && \
+          for i in *; do
+            echo $i
+            python /tmp/script.py "$i" tag2 > ${i}.tmp
+            mv ${i}.tmp ${i}
+          done
+      - name: add lines to files in public dir
+        run: |
+          cd ${{ env.FOLDER }}/target/public/ && \
+          for i in *; do
+            echo $i
+            python /tmp/script.py "$i" tag2 > ${i}.tmp
+            mv ${i}.tmp ${i}
+          done
+      - name: add line to file without tag2
+        run: |
+          cd ${{ env.FOLDER }}/target/public/ && \
+          python /tmp/script.py file3.proto tag1 > file3.proto.tmp && \
+          mv file3.proto.tmp file3.proto
+      - name: Run commit
+        run: |
+          cd ${{ env.FOLDER }}
+          # set commiter identity
+          git config user.email "serhii.khylyk@gmail.com"
+          git config user.name "Serhii Khylyk"
+          # Commit the changes and push the feature branch to origin
+          git add .
+          git commit -m "update proto to ${{ env.LATEST_TAG }}"
+          git push origin ${{ env.BRANCH_NAME }}
+      - name: make PR
+        run: |
+          cd ${{ env.FOLDER }}
+          echo ${{ secrets.GH_TOKEN }} | gh auth login --with-token
+          gh pr create \
+            --body "" \
+            --title "update proto to ${{ env.LATEST_TAG }}" \
+            --head "${{ env.BRANCH_NAME }}" \
+            --base "main" \
+            --assignee "ssh2003"
