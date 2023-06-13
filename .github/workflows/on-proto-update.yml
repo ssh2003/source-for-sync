@@ -40,11 +40,11 @@ jobs:
           git checkout -b ${{ env.BRANCH_NAME }}
       - name: copy all files from source repo
         run: |
-          cd ${{ env.FOLDER }}
-          pwd
-          ls -la
-          cp -Rv ../../../source/dir/models/ target/models/
-          cp -Rv ../../../source/dir/public/ target/public/
+          cd ${{ env.FOLDER }} && \
+          pwd && \
+          ls -la && \
+          cp -Rv ../../../source/dir/models/ target/models/ && \
+          cp -Rv ../../../source/dir/public/ target/public/ 
       - name: directory structure after copy
         run: |
           cd ${{ env.FOLDER }} && \
