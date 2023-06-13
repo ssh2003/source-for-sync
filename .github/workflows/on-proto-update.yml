@@ -66,7 +66,8 @@ jobs:
           file.close()
           EOF
       - name: where
-        run: pwd && ls -la && ls -la bin
+        run: |
+          pwd && ls -la && ls -la bin && ls -ls bin/ssh2003/target-for-sync/ 
       - name: add lines to files in model dir
         run: |
           pwd && \
