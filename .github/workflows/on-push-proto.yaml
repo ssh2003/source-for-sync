@@ -16,7 +16,9 @@ jobs:
       uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
       with:
         repo: "ssh2003/target-for-sync"
+        secrets: inherit
     sync-second-repo:
       uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
       with:
         repo: "ssh2003/second-target-for-sync"
+        secrets: inherit
