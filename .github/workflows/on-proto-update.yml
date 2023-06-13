@@ -3,23 +3,20 @@ on:
   workflow_call:
     inputs:
       repo:
-        description: 'Repository to sync'
+        description: Repository to sync
         required: true
-
 name: on-proto-update
-
 jobs:
   send-pull-requests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
         with:
-          fetch-depth: 0 # Checkout everything to get access to the tags
+          fetch-depth: 0
           ref: ${{github.event.pull_request.head.ref}}
           repository: ${{github.event.pull_request.head.repo.full_name}}
           token: ${{ secrets.GH_TOKEN }}
-
       - name: Setup env
         run: |
           echo "LATEST_TAG=$(git rev-parse --short=6 HEAD)" >> "$GITHUB_ENV"
@@ -40,9 +37,9 @@ jobs:
           git checkout -b ${{ env.BRANCH_NAME }}
       - name: copy all files from source repo
         run: |
-           cd ${{ env.FOLDER }}
-           cp -Rv ../../../source/dir/models target/
-           cp -Rv ../../../source/dir/public target/
+          cd ${{ env.FOLDER }}
+          cp -Rv ../../../source/dir/models target/
+          cp -Rv ../../../source/dir/public target/
       - name: directory structure after copy
         run: |
           cd ${{ env.FOLDER }} && \
