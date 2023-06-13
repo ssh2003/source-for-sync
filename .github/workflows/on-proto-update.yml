@@ -65,6 +65,8 @@ jobs:
             print(line, end="")
           file.close()
           EOF
+      - name: where
+        run: pwd
       - name: add lines to files in model dir
         run: |
           pwd && \
