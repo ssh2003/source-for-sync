@@ -1,11 +1,13 @@
 ---
+name: on-proto-update
+
 on:
   workflow_call:
     inputs:
       repo:
         description: Repository to sync
         required: true
-name: on-proto-update
+
 jobs:
   send-pull-requests:
     runs-on: ubuntu-latest
