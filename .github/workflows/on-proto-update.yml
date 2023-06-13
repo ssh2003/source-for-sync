@@ -41,8 +41,8 @@ jobs:
       - name: copy all files from source repo
         run: |
           cd ${{ env.FOLDER }}
-          cp -Rv ../../../source/dir/models target/
-          cp -Rv ../../../source/dir/public target/
+          cp -Rv ../../../source/dir/models/ target/
+          cp -Rv ../../../source/dir/public/ target/
       - name: directory structure after copy
         run: |
           cd ${{ env.FOLDER }} && \
