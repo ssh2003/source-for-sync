@@ -12,10 +12,10 @@ on:
 name: proto-sync
 jobs:
   sync-first-repo:
-    uses: ./syncronize-all.yaml@main
+    uses: ./.github/workflows/syncronize-all.yaml@main
     with:
       repo: ssh2003/target-for-sync
   sync-second-repo:
-    uses: ./syncronize-all.yaml@main
+    uses: ./.github/workflows/syncronize-all.yaml@main
     with:
       repo: ssh2003/second-target-for-sync
