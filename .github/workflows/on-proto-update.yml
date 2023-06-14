@@ -48,10 +48,8 @@ jobs:
           #!/usr/bin/env python3
           import json, sys, shutil
           file_name = sys.argv[1]
-          print(file_name)
           with open(file_name, 'r') as file:
             json=json.load(file)
-            print(json['proto'])
             for row in json['proto']:
               shutil.copyfile("../../../" + row['source'], row['target'])
           EOF
@@ -63,6 +61,10 @@ jobs:
           cd ${{ env.FOLDER }}
           ls -ls ../../../
           python3 /tmp/script.py .proto-sync.json
+      - name: check diffs
+        run: |
+          cd ${{ env.FOLDER }}
+          git diff
 
 
       # - name: Run commit
