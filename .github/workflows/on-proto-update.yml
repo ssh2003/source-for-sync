@@ -52,6 +52,8 @@ jobs:
             json=json.load(file)
             for row in json['proto']:
               shutil.copyfile("../../../" + row['source'], row['target'])
+              if row['patch']:
+                print("we will patch")
           EOF
       - name: check script
         run: |
