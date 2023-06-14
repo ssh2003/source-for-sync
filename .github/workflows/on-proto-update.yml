@@ -46,7 +46,7 @@ jobs:
         run: |
           cat << EOF > /tmp/script.py
           #!/usr/bin/env python3
-          import json, sys, shutil
+          import json, sys, shutil, os
           file_name = sys.argv[1]
           with open(file_name, 'r') as file:
             json=json.load(file)
