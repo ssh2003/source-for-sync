@@ -74,7 +74,7 @@ jobs:
             echo ::set-output name=status::failure
           fi
       - name: Run commit
-        if: ${{ steps.hello.diffs.status == 'success' }}
+        if: steps.hello.diffs.status == 'success'
         run: |
           cd ${{ env.FOLDER }}
           # set commiter identity
@@ -85,7 +85,7 @@ jobs:
           git commit -m "update proto to ${{ env.LATEST_TAG }}"
           git push origin ${{ env.BRANCH_NAME }}
       - name: make PR
-        if: ${{ steps.hello.diffs.status == 'success' }}
+        if: steps.hello.diffs.status == 'success'
         run: |
           cd ${{ env.FOLDER }}
           echo ${{ secrets.GH_TOKEN }} | gh auth login --with-token
