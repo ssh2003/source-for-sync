@@ -69,8 +69,10 @@ jobs:
           echo $CHANGED
           if [ $CHANGED -ge "1" ]
           then
+            echo "SUCCESS"
             echo ::set-output name=status::success
           else
+            echo "FAILURE"
             echo ::set-output name=status::failure
           fi
       - name: Run commit
