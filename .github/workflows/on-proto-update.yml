@@ -53,7 +53,16 @@ jobs:
             for row in json['proto']:
               shutil.copyfile("../../../" + row['source'], row['target'])
               if row['patch']:
-                print("we will patch")
+                file = open(row['target'], "r+")
+                while True:
+                    line = file.readline()
+                    line.strip()
+                    if not line:
+                        break
+                    if line.startswith("tag2."):
+                        line = line + "\n\nAddition line\n\n"
+                    print(line, end="")
+                file.close()
           EOF
       - name: check script
         run: |
@@ -61,7 +70,6 @@ jobs:
       - name: run script
         run: |
           cd ${{ env.FOLDER }}
-          ls -ls ../../../
           python3 /tmp/script.py .proto-sync.json
       - name: check diffs
         id: diffs
