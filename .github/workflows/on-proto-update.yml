@@ -48,6 +48,7 @@ jobs:
           #!/usr/bin/env python3
           import json, sys, shutil
           file_name = sys.argv[1]
+          print(file_name)
           with open(file_name, 'r') as file:
             json=json.load(file)
             print(json['proto'])
