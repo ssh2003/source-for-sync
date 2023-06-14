@@ -66,10 +66,10 @@ jobs:
           cd ${{ env.FOLDER }}
           CHANGED=$(git diff|wc -l)
           echo $CHANGED
-          if[ $CHANGED -ge "1" ];
-          then:
+          if [ $CHANGED -ge "1" ]
+          then
             echo ::set-output name=status::success
-          else:
+          else
             echo ::set-output name=status::failure
           fi
       - name: Run commit
