@@ -64,7 +64,7 @@ jobs:
       - name: check diffs
         run: |
           cd ${{ env.FOLDER }}
-          CHANGED = $(git diff|wc -l)
+          CHANGED=$(git diff|wc -l)
           echo $CHANGED
 
       # - name: Run commit
