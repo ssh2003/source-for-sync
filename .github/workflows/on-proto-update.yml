@@ -62,7 +62,7 @@ jobs:
         run: |
           cd ${{ env.FOLDER }}
           ls -ls ../../../
-          python3 /tmp/script.py ${{ env.FOLDER }}/.proto-sync.json
+          python3 /tmp/script.py .proto-sync.json
 
 
       # - name: Run commit
