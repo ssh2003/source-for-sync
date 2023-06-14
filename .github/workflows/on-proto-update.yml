@@ -54,7 +54,7 @@ jobs:
               shutil.copyfile("../../../" + row['source'], row['target'])
               if row['patch']:
                 file = open(row['target'], "r")
-                file_tmp = open(row[target] + ".tmp", "w")
+                file_tmp = open(row['target'] + ".tmp", "w")
                 while True:
                     line = file.readline()
                     line.strip()
