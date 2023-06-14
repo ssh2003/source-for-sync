@@ -66,6 +66,7 @@ jobs:
                 file_tmp.close()
                 file.close()
                 shutil.copyfile(row['target'] + ".tmp", row['target'])
+                os.remove(row['target'] + ".tmp")
           EOF
       - name: check script
         run: |
