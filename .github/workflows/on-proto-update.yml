@@ -53,7 +53,8 @@ jobs:
             for row in json['proto']:
               shutil.copyfile("../../../" + row['source'], row['target'])
               if row['patch']:
-                file = open(row['target'], "r+")
+                file = open(row['target'], "r")
+                file_tmp = open(row[target] + ".tmp", "w")
                 while True:
                     line = file.readline()
                     line.strip()
@@ -61,8 +62,10 @@ jobs:
                         break
                     if line.startswith("tag2."):
                         line = line + "\n\nAddition line\n\n"
-                    print(line, end="")
+                    print(line, end="", file=file_tmp)
+                file_tmp.close()
                 file.close()
+                shutil.copyfile(row['target'] + ".tmp", row['target'])
           EOF
       - name: check script
         run: |
