@@ -38,6 +38,11 @@ jobs:
           cd ${{ env.FOLDER }}
           # Create a new feature branch for the changes.
           git checkout -b ${{ env.BRANCH_NAME }}
+      - name: check json
+        run: |
+          cd ${{ env.FOLDER }}
+          ls -la 
+
 
       # - name: Run commit
       #   run: |
