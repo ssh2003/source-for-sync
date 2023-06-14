@@ -53,8 +53,7 @@ jobs:
             json=json.load(file)
             print(json['proto'])
             for row in json['proto']:
-              #shutils.copyfile()
-              print(row)
+              shutils.copyfile("../../../" + row['source']", row['target'])
           EOF
       - name: check script
         run: |
