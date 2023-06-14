@@ -41,7 +41,22 @@ jobs:
       - name: check json
         run: |
           cd ${{ env.FOLDER }}
-          ls -la 
+          ls -la
+      - name: python script
+        run: |
+          cat << EOF > /tmp/script.py
+          #!/usr/bin/env python3
+          import json, sys, shutil
+          file_name = sys.argv[1]
+          with open(file_name, 'r') as file:
+            json=json.load(file)
+            print(json['proto'])
+            for row in json['proto']:
+              shutils.copyfile()
+          EOF
+      - name: check script
+        run: |
+          cat /tmp/script.py
 
 
       # - name: Run commit
