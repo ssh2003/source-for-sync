@@ -4,9 +4,7 @@ on:
     branches:
       - main
     paths:
-      - source/dir/models/file4.proto
-      - source/dir/public/file.proto
-      - source/dir/public/file3.proto
+      '***.proto'
     tags-ignore:
       - "**"
 name: proto-sync
