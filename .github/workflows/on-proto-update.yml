@@ -60,6 +60,7 @@ jobs:
           cat /tmp/script.py
       - name: run script
         run: |
+          ls -ls ../../../../
           python3 /tmp/script.py ${{ env.FOLDER }}/.proto-sync.json
 
 
