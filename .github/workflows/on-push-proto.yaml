@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      '***.proto'
+      '*.proto'
     tags-ignore:
       - "**"
 name: proto-sync
