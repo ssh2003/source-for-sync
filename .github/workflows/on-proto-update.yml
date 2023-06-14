@@ -52,11 +52,15 @@ jobs:
             json=json.load(file)
             print(json['proto'])
             for row in json['proto']:
-              shutils.copyfile()
+              #shutils.copyfile()
+              print(row)
           EOF
       - name: check script
         run: |
           cat /tmp/script.py
+      - name: run script
+        run: |
+          python3 /tmp/script.py ${{ env.FOLDER }}/.proto-sync.json
 
 
       # - name: Run commit
