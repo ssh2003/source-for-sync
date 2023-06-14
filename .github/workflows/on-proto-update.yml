@@ -36,7 +36,7 @@ jobs:
       - name: create new branch
         run: |
           cd ${{ env.FOLDER }}
-          pwd && ls -la && ls -la source 
+          pwd && ls -la && ls -la source/dir
           # Create a new feature branch for the changes.
           git checkout -b ${{ env.BRANCH_NAME }}
 
