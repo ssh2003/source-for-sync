@@ -69,8 +69,9 @@ jobs:
         id: changed-files-excluded
         uses: tj-actions/changed-files@v36
         with:
-         files: |
-          **.proto
+          path: ${{ env.FOLDER }}
+          files: |
+            **.proto
       - name: Run step if any .js file(s) or any file in the static folder change
         if: steps.changed-files-excluded.outputs.any_changed == 'true'
         run: |
