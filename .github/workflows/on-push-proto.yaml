@@ -31,36 +31,11 @@ jobs:
       - env:
           OUTPUT1: ${{needs.get-repos-list.outputs.output1}}
         run: echo "$OUTPUT1"
-  # get-repos-list:
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     REPOS: ${{ steps.get-repos.outputs.repos }}
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
-  #       with:
-  #         fetch-depth: 0
-  #         ref: ${{github.event.pull_request.head.ref}}
-  #         repository: ${{github.event.pull_request.head.repo.full_name}}
-  #         token: ${{ secrets.GH_TOKEN }}
-  #     - name: get repos list
-  #       id: get-repos
-  #       #run: echo ::set-output name=repos::$(cat .repos-for-proto-sync.txt)
-  #       run: echo "repos=one" >> "$GITHUB_OUTPUT"
-  #     - name: show output
-  #       run: echo ${{ steps.get-repos.outputs.repos }}
-  # test-job-for-outputs:
-  #   runs-on: ubuntu-latest
-  #   needs: get-repos-list
-  #   steps:
-  #     - env:
-  #         REPOS: "${{ needs.get-repos-list.repos }}"
-  #       run: echo "${{ env.REPOS }}"
 
-  # update-proto:
-  #   needs: get-repos-list
-  #   uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
-  #   secrets: inherit
-  #   with:
-  #     repo: ${{ needs.get-repos-list.repos }}
-  #     #repo: "['ssh2003/target-for-sync', 'ssh2003/second-target-to-sync']"
+  update-proto:
+    needs: get-repos-list
+    uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
+    secrets: inherit
+    with:
+      repo: ${{ needs.get-repos-list.outputs.repos }}
+      #repo: "['ssh2003/target-for-sync', 'ssh2003/second-target-to-sync']"
