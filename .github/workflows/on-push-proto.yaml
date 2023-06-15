@@ -30,10 +30,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: get-repos-list
     steps:
-      - env:
-          REPOS: ${{ needs.get-repos-list.repos }}
       - name: test-output
         run: echo $REPOS
+        env:
+            REPOS: ${{ needs.get-repos-list.repos }}
 
   # update-proto:
   #   needs: get-repos-list
