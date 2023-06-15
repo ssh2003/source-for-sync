@@ -9,13 +9,16 @@ on:
       - "**"
 
 jobs:
+  strategy:
+    matrix:
+      repos: [ "ssh2003/target-for-sync", "ssh2003/second-target-to-sync" ]
   first:
     uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
     secrets: inherit
     with:
-      repo: "ssh2003/target-for-sync"
-  second:
-    uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
-    secrets: inherit
-    with:
-      repo: "ssh2003/second-target-to-sync"
+      repo: ${{ matrix.repos }}
+  # second:
+  #   uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
+  #   secrets: inherit
+  #   with:
+  #     repo: "ssh2003/second-target-to-sync"
