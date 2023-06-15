@@ -8,6 +8,7 @@ on:
       - "**"
 jobs:
   test-vars:
+    runs-on: ubuntu-latest
     steps:
       - name: vars
         run: |
