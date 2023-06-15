@@ -7,11 +7,16 @@ on:
       '**.proto'
     tags-ignore:
       - "**"
+env:
+  REPOS_TO_SYNC
 
 jobs:
-  update-proto:
-    uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
-    secrets: inherit
-    with:
-       repo: ${{ secrets.GH_TOKEN }}
-      #repo: "['ssh2003/target-for-sync', 'ssh2003/second-target-to-sync']"
+  test-env:
+    - name: test
+      run: echo $REPOS_TO_SYNC
+  # update-proto:
+  #   uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
+  #   secrets: inherit
+  #   with:
+  #      repo: ${{ secrets.GH_TOKEN }}
+  #     #repo: "['ssh2003/target-for-sync', 'ssh2003/second-target-to-sync']"
