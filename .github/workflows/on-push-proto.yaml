@@ -14,7 +14,7 @@ jobs:
         run: |
           echo ${{ fromJson(vars.REPOS_TO_SYNC) }}
           echo ${{ toJson(vars.REPOS_TO_SYNC) }}
-          echo ${{ fromJson("['ssh2003/target-for-sync', 'ssh2003/second-target-to-sync']")}}
+          echo ${{ fromJson(['ssh2003/target-for-sync', 'ssh2003/second-target-to-sync'])}}
   update-proto:
     uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
     secrets: inherit
