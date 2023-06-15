@@ -43,7 +43,7 @@ jobs:
       - name: get repos list
         id: get-repos
         #run: echo ::set-output name=repos::$(cat .repos-for-proto-sync.txt)
-        run: echo "repos=$(cat .repos-for-proto-sync.txt)" >> "$GITHUB_OUTPUT"
+        run: echo "repos=one" >> "$GITHUB_OUTPUT"
       - name: show output
         run: echo ${{ steps.get-repos.outputs.repos }}
   test-gob-for-outputs:
