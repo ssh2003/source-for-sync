@@ -9,18 +9,13 @@ on:
       - "**"
 
 jobs:
-  sync-repos:
-    runs-on: ubuntu-latest
-    steps:
-      first:
-        - name: First repo
-          uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
-          secrets: inherit
-          with:
-            repo: "ssh2003/target-for-sync"
-      second:
-        - name: Second repo
-          uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
-          secrets: inherit
-          with:
-            repo: "ssh2003/second-target-for-sync"
+  first:
+    uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
+    secrets: inherit
+    with:
+      repo: "ssh2003/target-for-sync"
+  second:
+    uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
+    secrets: inherit
+    with:
+      repo: "ssh2003/second-target-for-sync"
