@@ -23,7 +23,8 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
       - name: get repos list
         id: get-repos
-        run: echo ::set-output name=repos::$(cat .repos-for-proto-sync.txt)
+        #run: echo ::set-output name=repos::$(cat .repos-for-proto-sync.txt)
+        run: echo "repos=$(cat .repos-for-proto-sync.txt)" >> "$GITHUB_OUTPUT"
       - name: show output
         run: echo ${{ steps.get-repos.outputs.repos }}
   test-gob-for-outputs:
