@@ -12,12 +12,14 @@ jobs:
   sync-repoa:
     steps:
       first:
-        uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
-        secrets: inherit
-        with:
-          repo: "ssh2003/target-for-sync"
+        - name: First repo
+          uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
+          secrets: inherit
+          with:
+            repo: "ssh2003/target-for-sync"
       second:
-        uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
-        secrets: inherit
-        with:
-          repo: "ssh2003/second-target-for-sync"
+        - name: Second repo
+          uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
+          secrets: inherit
+          with:
+            repo: "ssh2003/second-target-for-sync"
