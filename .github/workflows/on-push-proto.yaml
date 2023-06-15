@@ -12,6 +12,6 @@ jobs:
   update-proto:
     uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
     secrets: inherit
-    # with:
-    #   repo: "${{ secrets.REPOS_TO_SYNC }}"
+    with:
+       repo: "${{ secrets.REPOS_TO_SYNC }}"
       #repo: "['ssh2003/target-for-sync', 'ssh2003/second-target-to-sync']"
