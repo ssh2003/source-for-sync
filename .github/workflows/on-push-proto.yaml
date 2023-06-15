@@ -9,6 +9,11 @@ on:
       - "**"
 
 jobs:
+  get-repos-list:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get repos list
+        run: echo ::set-output name=repos::$(cat .repos-for-proto-sync.txt) 
   update-proto:
     uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
     secrets: inherit
