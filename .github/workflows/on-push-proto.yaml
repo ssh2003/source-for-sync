@@ -27,9 +27,11 @@ jobs:
       - name: show output
         run: echo ${{ steps.get-repos.outputs.repos }}
   test-gob-for-outputs:
-    run-on: ubuntu-latest
-    needs: get-repos-list
-    run: echo ${{ needs.get-repos-list.repos }}
+    steps:
+      - name: test-output
+        run-on: ubuntu-latest
+        needs: get-repos-list
+        run: echo ${{ needs.get-repos-list.repos }}
 
   # update-proto:
   #   needs: get-repos-list
