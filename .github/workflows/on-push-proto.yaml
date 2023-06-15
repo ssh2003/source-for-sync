@@ -7,9 +7,10 @@ on:
       '**.proto'
     tags-ignore:
       - "**"
-name: proto-sync
+
 jobs:
-  sync-repoa:
+  sync-repos:
+    runs-on: ubuntu-latest
     steps:
       first:
         - name: First repo
