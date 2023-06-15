@@ -37,5 +37,7 @@ jobs:
     uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
     secrets: inherit
     with:
-      repo: ${{ needs.get-repos-list.outputs.repos }}
+      env:
+          OUTPUT1: ${{needs.get-repos-list.outputs.output1}}
+      repo: ${{ env.OUTPUT1 }}
       #repo: "['ssh2003/target-for-sync', 'ssh2003/second-target-to-sync']"
