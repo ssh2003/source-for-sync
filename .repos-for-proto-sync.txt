@@ -1,1 +1,0 @@
-"['ssh2003/target-for-sync', 'ssh2003/second-target-to-sync']"
