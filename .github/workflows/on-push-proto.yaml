@@ -6,11 +6,11 @@ on:
     paths: "**.proto"
     tags-ignore:
       - "**"
-env: REPOS_TO_SYNC
+
 jobs:
   test-env:
     - name: test
-      run: echo ${{ env.REPOS_TO_SYNC }}
+      run: echo ${{ vars.REPOS_TO_SYNC }}
 
   # update-proto:
   #   uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
