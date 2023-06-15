@@ -10,11 +10,11 @@ on:
         type: matrix
 
 jobs:
-  strategy:
-    matrix:
-      repos: ${ inputs.repo }
   send-pull-requests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repos: ${ inputs.repo }
     steps:
       - name: Checkout code
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
