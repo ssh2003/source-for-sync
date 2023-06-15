@@ -9,10 +9,10 @@ on:
 jobs:
   test-vars:
     steps:
-      name: vars
-      run: |
-        echo ${{ fromJson(vars.REPOS_TO_SYNC) }}
-        echo ${{ toJson(vars.REPOS_TO_SYNC) }}
+      - name: vars
+        run: |
+          echo ${{ fromJson(vars.REPOS_TO_SYNC) }}
+          echo ${{ toJson(vars.REPOS_TO_SYNC) }}
   update-proto:
     uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
     secrets: inherit
