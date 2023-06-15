@@ -32,9 +32,9 @@ jobs:
     needs: get-repos-list
     steps:
       - name: test-output
-        run: echo $REPOS
+        run: echo "${{ env.REPOS }}"
         env:
-            REPOS: ${{ needs.get-repos-list.repos }}
+            REPOS: "${{ needs.get-repos-list.repos }}"
 
   # update-proto:
   #   needs: get-repos-list
