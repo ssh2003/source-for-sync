@@ -12,7 +12,7 @@ jobs:
   get-repos-list:
     runs-on: ubuntu-latest
     outputs:
-      repos: "steps.get-repos.outputs.repos"
+      repos: ${{ steps.get-repos.outputs.repos }}
     steps:
       - name: Checkout code
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
@@ -26,6 +26,11 @@ jobs:
         run: echo ::set-output name=repos::$(cat .repos-for-proto-sync.txt)
       - name: show output
         run: echo ${{ steps.get-repos.outputs.repos }}
+  test-gob-for-outputs:
+    run-on: ubuntu-latest
+    needs: get-repos-list
+    run: echo ${{ needs.get-repos-list.repos }}
+
   # update-proto:
   #   needs: get-repos-list
   #   uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
