@@ -24,10 +24,12 @@ jobs:
       - name: get repos list
         id: get-repos
         run: echo ::set-output name=repos::$(cat .repos-for-proto-sync.txt)
-  update-proto:
-    needs: get-repos-list
-    uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
-    secrets: inherit
-    with:
-      repo: ${{ needs.get-repos-list.repos }}
-      #repo: "['ssh2003/target-for-sync', 'ssh2003/second-target-to-sync']"
+      - name: show output
+        run: echo ${{ steps.get-repos.outputs.repos }}
+  # update-proto:
+  #   needs: get-repos-list
+  #   uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
+  #   secrets: inherit
+  #   with:
+  #     repo: ${{ needs.get-repos-list.repos }}
+  #     #repo: "['ssh2003/target-for-sync', 'ssh2003/second-target-to-sync']"
