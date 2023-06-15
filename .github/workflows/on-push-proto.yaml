@@ -3,17 +3,15 @@ on:
   push:
     branches:
       - main
-    paths:
-      '**.proto'
+    paths: "**.proto"
     tags-ignore:
       - "**"
-env:
-  REPOS_TO_SYNC
-
+env: REPOS_TO_SYNC
 jobs:
   test-env:
     - name: test
-      run: echo $REPOS_TO_SYNC
+      run: echo ${{ env.REPOS_TO_SYNC }}
+
   # update-proto:
   #   uses: ssh2003/source-for-sync/.github/workflows/on-proto-update.yml@main
   #   secrets: inherit
