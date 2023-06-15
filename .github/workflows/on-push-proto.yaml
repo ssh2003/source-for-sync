@@ -52,7 +52,6 @@ jobs:
     steps:
       - env:
           REPOS: "${{ needs.get-repos-list.repos }}"
-      - name: test-output
         run: echo "${{ env.REPOS }}"
 
   # update-proto:
