@@ -92,6 +92,7 @@ jobs:
             echo "FAILURE"
             echo ::set-output name=status::failure
           fi
+          
       - name: Run commit
         if: steps.diffs.outputs.status == 'success'
         run: |
